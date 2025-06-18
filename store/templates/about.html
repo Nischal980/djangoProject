@@ -1,0 +1,38 @@
+{% extends 'base.html'%}
+
+{% block content %}
+
+  <div id="modal" class="container mx-auto flex justify-center items-center px-4 md:px-10 py-20">
+    <!--- more free and premium Tailwind CSS components at https://tailwinduikit.com/ --->
+    <div class="bg-white dark:bg-gray-800 px-3 md:px-4 py-12 flex flex-col justify-center items-center">
+      <h1 class="mt-8 md:mt-12 text-3xl lg:text-4xl font-semibold leading-10 text-center text-gray-800 text-center md:w-9/12 lg:w-7/12 dark:text-white">Welcome to the BookTown family!</h1>
+      <p class="mt-10 text-base leading-normal text-center text-gray-600 md:w-9/12 lg:w-7/12 dark:text-white">At BookTown, we are passionate about enriching minds and expanding horizons through the power of reading.</p>
+      <div class="mt-12 md:mt-14 w-full flex justify-center">
+        <button onclick="window.location.href='/';" class="dark:text-white dark:border-white w-full sm:w-auto border border-gray-800 text-base font-medium text-gray-800 py-5 px-14 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 hover:bg-gray-800 hover:text-white dark:hover:text-white dark:hover:bg-gray-700">Back to store</button>
+      </div>
+      <section class="bg-white py-8">
+
+        <div class="container py-8 px-6 mx-auto ">
+
+            <a class=" uppercase tracking-wide no-underline hover:no-underline font-bold text-gray-800 text-xl mb-8 " href="#">
+			About
+		</a>
+
+            <p class="mt-8 mb-8">Welcome to BookTown, your premier online destination for authentic books in Nepal.
+                <br>
+             
+            <p class="mb-8">Our mission is to provide a vast selection of books across various genres at reasonable prices and in the quantities you desire.
+
+                Whether you’re an individual on the quest for knowledge or a wholesaler looking to stock up on the latest bestsellers, BookTown is your one-stop shop. We take pride in offering only the most genuine and high-quality publications, ensuring that every page you turn is a step towards a more informed and imaginative world.
+                
+                Our vision is to become the top place to buy books in Nepal, catering to the needs of book lovers and sellers alike. We understand the value of literature in shaping society and are committed to making it accessible to all. With BookTown, you can rest assured that you’re not just purchasing a book; you’re investing in a legacy of learning.
+            </p>
+
+        </div>
+
+    </section>
+    </div>
+  </div>
+
+
+{% endblock%}
