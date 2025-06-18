@@ -79,7 +79,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 #         print(f"Book '{book_title}' not found in the dataset!")  
 #         return []
 
-df = pd.read_csv(r'C:\Users\nisch\OneDrive\Desktop\New folder\fyp_django-master\store\Books.csv', encoding='utf-8', dtype={'Year-Of-Publication': 'str'}, low_memory=False)
+df = pd.read_csv(r'store/Books.csv', encoding='utf-8', dtype={'Year-Of-Publication': 'str'}, low_memory=False)
 
 combined_df = pd.concat([df], ignore_index=True)
 combined_df.columns = combined_df.columns.str.strip()
