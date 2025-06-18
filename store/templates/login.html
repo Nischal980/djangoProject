@@ -1,0 +1,138 @@
+
+{%extends 'base.html'%}
+{% block content %}
+{%load static%}
+<!-- TW Elements is free under AGPL, with commercial license required for specific uses. See more details: https://tw-elements.com/license/ and contact us for queries at tailwind@mdbootstrap.com --> 
+<section class="gradient-form h-full bg-neutral-200 dark:bg-neutral-700">
+    <div class="container h-full p-10">
+      <div
+        class="g-6 flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
+        <div class="w-full">
+          <div
+            class="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
+            <div class="g-0 lg:flex lg:flex-wrap">
+              <!-- Left column container-->
+              <div class="px-4 md:px-0 lg:w-6/12">
+                <div class="md:mx-6 md:p-12">
+                  <!--Logo-->
+                  <div class="text-center">
+                    <img
+                      class="mx-auto w-48"
+                      src="{% static 'assets/logo.png' %}"
+                      alt="logo" />
+                    <h4 class="mb-12 mt-1 pb-1 text-xl font-semibold">
+                      We are The BookWorm
+                    </h4>
+                  </div>
+  
+                  <form method="post" id="myForm">
+                    {% csrf_token %}
+                    <p class="mb-4 text-l font-semibold">Please login to your account</p>
+                    <!--Username input-->
+                    <div class="relative mb-4" data-te-input-wrapper-init>
+                      <input
+                        type="text"
+                        class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                        name = "username"
+                        placeholder="Username" />
+                      
+                    </div>
+  
+                    <!--Password input-->
+                    <div class="relative mb-4" data-te-input-wrapper-init>
+                      <input
+                        type="password"
+                        id="passwordInput"
+                        class="peer block min-h-[auto] w-full rounded border-0 bg-transparent px-3 py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:placeholder:text-neutral-200 [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                        name="password"
+                        placeholder="Password" />
+                      <button
+                        type="button"
+                        onclick="togglePasswordVisibility('passwordInput', 'togglePasswordIcon')"
+                        class="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-gray-700">
+                        <svg id="togglePasswordIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12l3.5 3.5M21 12a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" />
+                        </svg>
+                      </button>
+                    </div>
+  
+                    <!--Submit button-->
+                    <div class="mb-12 pb-1 pt-1 text-center">
+                      <button
+                        class="mb-3 inline-block w-full rounded px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-black shadow-[0_4px_9px_-4px_rgba(0,0,0,0.2)] transition duration-150 ease-in-out hover:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] focus:outline-none focus:ring-0 active:shadow-[0_8px_9px_-4px_rgba(0,0,0,0.1),0_4px_18px_0_rgba(0,0,0,0.2)] bg-gradient-to-b from-green-200 to-blue-500"
+                        type="button"
+                        onclick="setAction('login')"
+                        data-te-ripple-init
+                        data-te-ripple-color="light"
+                        >
+                        Log in
+                      </button>
+  
+                      <!--Forgot password link-->
+                      <a href="#!">Forgot password?</a>
+                    </div>
+  
+                    <!--Register button-->
+                    <div class="flex items-center justify-between pb-6">
+                      <p class="mb-0 mr-2">Don't have an account?</p>
+                      <button
+                        type="button"
+                        onclick="setAction('register')"
+                        class="inline-block rounded border-2 border-danger px-6 pb-[6px] pt-2 text-xs font-medium uppercase leading-normal text-danger transition duration-150 ease-in-out hover:border-danger-600 hover:bg-neutral-500 hover:bg-opacity-10 hover:text-danger-600 focus:border-danger-600 focus:text-danger-600 focus:outline-none focus:ring-0 active:border-danger-700 active:text-danger-700 dark:hover:bg-neutral-100 dark:hover:bg-opacity-10"
+                        data-te-ripple-init
+                        data-te-ripple-color="light">
+                        Register
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+  
+              <!-- Right column container with background and description-->
+              <div
+                class="flex items-center rounded-b-lg lg:w-6/12 lg:rounded-r-lg lg:rounded-bl-none bg-gradient-to-b from-green-200 to-blue-500"
+                >
+                <div class="px-4 py-6 text-white md:mx-6 md:p-12">
+                  <h4 class="text-black text-4xl my-4">
+                    We are more than just a company
+                  </h4>
+                  <p class="text-black inline-block leading-relaxed hover:text-black hover:border-black">
+                    At BookTown, we are passionate about enriching minds and expanding horizons through the power of reading.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    function togglePasswordVisibility(inputId, iconId) {
+    var passwordInput = document.getElementById(inputId);
+    var icon = document.getElementById(iconId);
+
+    if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        icon.innerHTML = `
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12l-3.5-3.5M3 12a9 9 0 019-9 9 9 0 019 9 9 9 0 01-9 9 9 9 0 01-9-9z" />
+        `;
+    } else {
+        passwordInput.type = "password";
+        icon.innerHTML = `
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12l3.5 3.5M21 12a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" />
+        `;
+    }
+}
+    function setAction(type) {
+        var form = document.getElementById('myForm');
+        if (type === 'login') {
+            form.action = "{% url 'login' %}";
+        } else if (type === 'register') {
+            form.action = "{% url 'register' %}";
+        }
+        form.submit();
+    }
+    </script>
+    
+  {% endblock %}

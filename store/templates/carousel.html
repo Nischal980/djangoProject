@@ -1,0 +1,54 @@
+{% load mathfilters %}
+<div class="carousel relative container mx-auto bg-gradient-to-t from-green-200 to-blue-500 " style="max-width:1600px;">
+    <div class="carousel-inner relative overflow-hidden w-full">
+        <!-- Slide Generation -->
+        {% for item in sale_items %}
+        <input class="carousel-open" type="radio" id="carousel-{{ forloop.counter }}" name="carousel" aria-hidden="true" hidden="" {% if forloop.first %}checked="checked"{% endif %}>
+        <div class="carousel-item absolute opacity-0" style="height:70vh; display: flex; align-items: center; justify-content: space-between;">
+            <!-- Text Content -->
+            <div class="container mx-auto w-2/3 justify-center items-center px-0 lg:px-10">
+                <div class="flex flex-col items-start px-6 tracking-wide">
+                    <a href="{% url 'product' item.id %}">
+                        <p class="text-black text-4xl my-4">{{ item.name }}</p>
+                    </a>
+                    <a href="{% url 'product' item.id %}">
+                        <p class="text-black inline-block leading-relaxed hover:text-black hover:border-black">{{ item.description|truncatechars:500 }}</p>
+                    </a>
+                    <a href="{% url 'product' item.id %}">
+                        <p class="pt-3 text-gray-900" href='#'><strike>रु{{ item.price }}</strike> &nbsp; रु{{ item.sale_price }}</p>
+                    </a>
+                    <a href="{% url 'product' item.id %}">
+                        <p class="text-black inline-block pt-6 border-b border-gray-600 leading-relaxed hover:text-black hover:border-black" >View Product</p>
+                    </a>
+                </div>
+            </div>
+            <div class="w-1/3 h-full flex justify-end items-end">
+                <img src="{{ item.image.url }}" alt="{{ item.name }}" class="object-contain h-full">
+            </div>
+        </div>
+        {% endfor %}
+
+        {% comment %} <!-- Dynamic Navigation Controls -->
+        {% for item in sale_items %}
+            {% if forloop.first %}
+                <label for="carousel-{{ sale_items|length }}" class="prev control-{{ forloop.counter }} w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+                <label for="carousel-{{ forloop.counter|add:'1' }}" class="next control-{{ forloop.counter }} w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+            {% elif forloop.last %}
+                <label for="carousel-{{ forloop.counter|add:'-1' }}" class="prev control-{{ forloop.counter }} w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+                <label for="carousel-1" class="next control-{{ forloop.counter }} w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+            {% else %}
+                <label for="carousel-{{ forloop.counter|add:'-1' }}" class="prev control-{{ forloop.counter }} w-10 h-10 ml-2 md:ml-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 left-0 my-auto">‹</label>
+                <label for="carousel-{{ forloop.counter|add:'1' }}" class="next control-{{ forloop.counter }} w-10 h-10 mr-2 md:mr-10 absolute cursor-pointer hidden text-3xl font-bold text-black hover:text-white rounded-full bg-white hover:bg-gray-900 leading-tight text-center z-10 inset-y-0 right-0 my-auto">›</label>
+            {% endif %}
+        {% endfor %}
+
+        <!-- Dynamic Carousel Indicators -->
+        <ol class="carousel-indicators">
+            {% for item in sale_items %}
+                <li class="inline-block mr-3">
+                    <label for="carousel-{{ forloop.counter }}" class="carousel-bullet cursor-pointer block text-4xl text-gray-400 hover:text-gray-900">•</label>
+                </li>
+            {% endfor %}
+        </ol> {% endcomment %}
+    </div>
+</div>
