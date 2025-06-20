@@ -1,0 +1,126 @@
+{%extends 'base.html'%} {% block content %} {% load static %} 
+<div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+    <div class="flex  flex-col bg-white shadow-xl">
+        <div class="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
+          <div class="flex items-start justify-between">
+            <h2 class="text-lg font-medium text-gray-900" id="slide-over-title">Shopping cart</h2>
+          </div>
+
+          <div class="mt-8">
+            <div class="flow-root">
+              <ul role="list" class="-my-6 divide-y divide-gray-200">
+                {% if cart_products %}
+                {% for product in cart_products %}
+                <li class="flex py-6">
+                  <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+                    <img src="{{product.image.url}}" alt="{{product.name}}" class="h-full w-full object-cover object-center">
+                  </div>
+
+                  <div class="ml-4 flex flex-1 flex-col">
+                    <div>
+                      <div class="flex justify-between text-base font-medium text-gray-900">
+                        <h3>
+                          <a href="{% url 'product' product.id %}">{{product.name}}</a>
+                        </h3>
+                        {% if product.is_sale%}
+                        <p class="ml-4">रु {{product.sale_price}}</p>
+                        {% else %}
+                        <p class="ml-4">रु {{product.price}}</p>
+                        {% endif %}
+                      </div>
+                      <p class="mt-1 text-sm text-gray-500">{{product.author}}, {{product.publicationx}}</p>
+                    </div>
+                    <div class="flex flex-1 items-end justify-between text-sm">
+                      {% for key, value in quantities.items %}
+                      {% if key == product.id|slugify %}
+                        <p class="text-gray-500">Qty {{value}}</p>
+                      {% endif %}
+                      {% endfor %}
+                      <div class="flex">
+                        <button type="button" data-index="{{product.id}}" class="font-medium text-red-600 delete-product">Remove</button>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                {% endfor %}
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-t border-gray-200 px-4 py-6 sm:px-6">
+          <div class="flex justify-between text-base font-medium text-gray-900">
+            <p>Total</p>
+            <p>रु{{total}}</p>
+          </div>
+          <p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+          <div class="mt-6">
+    <a href="{% if user.is_authenticated %}
+            {% if user.profile.khalti_user %}
+                https://khalti.com/login
+            {% else %}
+                {% url 'add_order' %}
+            {% endif %}
+        {% else %}
+            {% url 'login' %}
+        {% endif %}" 
+   class="mx-auto mt-8 flex justify-center text-center rounded-md border border-transparent w-40 bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">
+    Checkout
+</a>
+         
+          </div>
+          <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
+            <p>
+              or
+              <button type="button" class="font-medium text-indigo-600 hover:text-indigo-500"
+              onclick="location.href = '{% url "home" %}';">
+                Continue Shopping
+                <span aria-hidden="true"> &rarr;</span>
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+      {% else %}
+      <div class="flex justify-center text-base font-medium text-gray-900">
+        <p>Empty Cart</p>
+      </div>
+      <p class="flex justify-center mt-3 text-sm text-gray-500">No items in your shopping cart.</p>
+
+      {% endif %}
+
+      <script>
+        // Delete Item From Cart
+        
+          $(document).on('click', '.delete-product', function(e){
+            e.preventDefault();
+            console.log("Pressed")
+            // grab the product id
+            //var productid = $(this).data('index');
+          
+            $.ajax({
+            type: 'POST',
+            url: '{% url 'cart_delete' %}',
+            data: {
+              product_id: $(this).data('index'),
+              csrfmiddlewaretoken: '{{ csrf_token }}',
+              action: 'post'
+            },
+            success: function(json){
+                //console.log(json)
+                //document.getElementById("cart_quantity").textContent = json.qty
+                location.reload();
+            },
+          
+            error: function(xhr, errmsg, err){
+      
+        }
+      
+      
+        });
+      
+      })
+      
+      </script>
+  {% endblock %}
